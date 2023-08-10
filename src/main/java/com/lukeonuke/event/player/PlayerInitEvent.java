@@ -8,13 +8,15 @@ import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.text.Text;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class PlayerInitEvent implements ServerPlayConnectionEvents.Init {
     @Override
     public void onPlayInit(ServerPlayNetworkHandler handler, MinecraftServer server) {
         try {
             String uuid = handler.getPlayer().getUuidAsString();
-            DataModel data = DataService.getInstance().getPlayerData("1088934690385317928", uuid);
+            DataModel data = DataService.getInstance().getPlayerData(Files.readString(Path.of("guild.txt")), uuid);
             server.sendMessage(Text.of(handler.player.getName().getString() + " joined as " + data.getName()));
         } catch (IOException | InterruptedException e) {
             handler.disconnect(Text.of("Login failed, " + e.getMessage()));
