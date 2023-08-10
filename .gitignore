@@ -16,8 +16,7 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-gradlew
-gradlew.bat
+.idea/**
 .gradle/**
 gradle/**
 build/**
